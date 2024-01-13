@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package cloud;
+
+option go_package = "proto.v1;proto";
+
+service Cloud {
+    rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponce); 
+}
+
+message UploadFileRequest{
+    string name_file = 1;
+    bytes file = 2;
+}
+
+message UploadFileResponce {
+    string name_file = 1;
+}
