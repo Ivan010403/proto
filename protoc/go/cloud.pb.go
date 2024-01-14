@@ -25,8 +25,9 @@ type UploadFileRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	NameFile string `protobuf:"bytes,1,opt,name=name_file,json=nameFile,proto3" json:"name_file,omitempty"`
-	File     []byte `protobuf:"bytes,2,opt,name=file,proto3" json:"file,omitempty"`
+	NameFile   string `protobuf:"bytes,1,opt,name=name_file,json=nameFile,proto3" json:"name_file,omitempty"`
+	FileFormat string `protobuf:"bytes,2,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+	File       []byte `protobuf:"bytes,3,opt,name=file,proto3" json:"file,omitempty"`
 }
 
 func (x *UploadFileRequest) Reset() {
@@ -68,6 +69,13 @@ func (x *UploadFileRequest) GetNameFile() string {
 	return ""
 }
 
+func (x *UploadFileRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
 func (x *UploadFileRequest) GetFile() []byte {
 	if x != nil {
 		return x.File
@@ -80,7 +88,7 @@ type UploadFileResponce struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	NameFile string `protobuf:"bytes,1,opt,name=name_file,json=nameFile,proto3" json:"name_file,omitempty"`
+	FullName string `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 }
 
 func (x *UploadFileResponce) Reset() {
@@ -115,32 +123,365 @@ func (*UploadFileResponce) Descriptor() ([]byte, []int) {
 	return file_cloud_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *UploadFileResponce) GetNameFile() string {
+func (x *UploadFileResponce) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+type DeleteFileRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NameFile   string `protobuf:"bytes,1,opt,name=name_file,json=nameFile,proto3" json:"name_file,omitempty"`
+	FileFormat string `protobuf:"bytes,2,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+}
+
+func (x *DeleteFileRequest) Reset() {
+	*x = DeleteFileRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteFileRequest) ProtoMessage() {}
+
+func (x *DeleteFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteFileRequest.ProtoReflect.Descriptor instead.
+func (*DeleteFileRequest) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DeleteFileRequest) GetNameFile() string {
 	if x != nil {
 		return x.NameFile
 	}
 	return ""
 }
 
+func (x *DeleteFileRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+type DeleteFileResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FullName string `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+}
+
+func (x *DeleteFileResponce) Reset() {
+	*x = DeleteFileResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteFileResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteFileResponce) ProtoMessage() {}
+
+func (x *DeleteFileResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteFileResponce.ProtoReflect.Descriptor instead.
+func (*DeleteFileResponce) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DeleteFileResponce) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+type GetFileRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NameFile   string `protobuf:"bytes,1,opt,name=name_file,json=nameFile,proto3" json:"name_file,omitempty"`
+	FileFormat string `protobuf:"bytes,2,opt,name=file_format,json=fileFormat,proto3" json:"file_format,omitempty"`
+}
+
+func (x *GetFileRequest) Reset() {
+	*x = GetFileRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFileRequest) ProtoMessage() {}
+
+func (x *GetFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFileRequest.ProtoReflect.Descriptor instead.
+func (*GetFileRequest) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetFileRequest) GetNameFile() string {
+	if x != nil {
+		return x.NameFile
+	}
+	return ""
+}
+
+func (x *GetFileRequest) GetFileFormat() string {
+	if x != nil {
+		return x.FileFormat
+	}
+	return ""
+}
+
+type GetFileResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	File []byte `protobuf:"bytes,1,opt,name=file,proto3" json:"file,omitempty"`
+}
+
+func (x *GetFileResponce) Reset() {
+	*x = GetFileResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFileResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFileResponce) ProtoMessage() {}
+
+func (x *GetFileResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFileResponce.ProtoReflect.Descriptor instead.
+func (*GetFileResponce) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetFileResponce) GetFile() []byte {
+	if x != nil {
+		return x.File
+	}
+	return nil
+}
+
+type GetFullDataRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetFullDataRequest) Reset() {
+	*x = GetFullDataRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFullDataRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFullDataRequest) ProtoMessage() {}
+
+func (x *GetFullDataRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFullDataRequest.ProtoReflect.Descriptor instead.
+func (*GetFullDataRequest) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetFullDataRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetFullDataResponce struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Data []byte `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
+}
+
+func (x *GetFullDataResponce) Reset() {
+	*x = GetFullDataResponce{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cloud_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetFullDataResponce) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetFullDataResponce) ProtoMessage() {}
+
+func (x *GetFullDataResponce) ProtoReflect() protoreflect.Message {
+	mi := &file_cloud_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetFullDataResponce.ProtoReflect.Descriptor instead.
+func (*GetFullDataResponce) Descriptor() ([]byte, []int) {
+	return file_cloud_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetFullDataResponce) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_cloud_proto protoreflect.FileDescriptor
 
 var file_cloud_proto_rawDesc = []byte{
 	0x0a, 0x0b, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x05, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x22, 0x44, 0x0a, 0x11, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x46, 0x69,
+	0x6c, 0x6f, 0x75, 0x64, 0x22, 0x65, 0x0a, 0x11, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x46, 0x69,
 	0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d,
 	0x65, 0x5f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61,
-	0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x22, 0x31, 0x0a, 0x12, 0x55, 0x70,
-	0x6c, 0x6f, 0x61, 0x64, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65,
-	0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61, 0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x32, 0x4c, 0x0a,
+	0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x66,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66, 0x69, 0x6c,
+	0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x22, 0x31, 0x0a, 0x12, 0x55,
+	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63,
+	0x65, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x75, 0x6c, 0x6c, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6c, 0x6c, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x51,
+	0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x66, 0x69, 0x6c, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61, 0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65,
+	0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66, 0x69, 0x6c, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61,
+	0x74, 0x22, 0x31, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x75, 0x6c, 0x6c, 0x5f,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x75, 0x6c, 0x6c,
+	0x4e, 0x61, 0x6d, 0x65, 0x22, 0x4e, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x5f, 0x66,
+	0x69, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6e, 0x61, 0x6d, 0x65, 0x46,
+	0x69, 0x6c, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x66, 0x6f, 0x72, 0x6d,
+	0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x66, 0x69, 0x6c, 0x65, 0x46, 0x6f,
+	0x72, 0x6d, 0x61, 0x74, 0x22, 0x25, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x66, 0x69, 0x6c, 0x65, 0x22, 0x24, 0x0a, 0x12, 0x47,
+	0x65, 0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x29, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x61, 0x74, 0x61,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x32, 0x93, 0x02, 0x0a,
 	0x05, 0x43, 0x6c, 0x6f, 0x75, 0x64, 0x12, 0x43, 0x0a, 0x0a, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64,
 	0x46, 0x69, 0x6c, 0x65, 0x12, 0x18, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x55, 0x70, 0x6c,
 	0x6f, 0x61, 0x64, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19,
 	0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x46, 0x69, 0x6c,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x28, 0x01, 0x42, 0x12, 0x5a, 0x10, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x76, 0x31, 0x3b, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x76, 0x31, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x28, 0x01, 0x12, 0x41, 0x0a, 0x0a, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x12, 0x18, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x12, 0x3a,
+	0x0a, 0x07, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x65, 0x12, 0x15, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x16, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x69, 0x6c, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65, 0x30, 0x01, 0x12, 0x46, 0x0a, 0x0b, 0x47, 0x65,
+	0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x12, 0x19, 0x2e, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x47, 0x65, 0x74,
+	0x46, 0x75, 0x6c, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x63, 0x65,
+	0x30, 0x01, 0x42, 0x10, 0x5a, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x76, 0x31, 0x3b, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -155,16 +496,28 @@ func file_cloud_proto_rawDescGZIP() []byte {
 	return file_cloud_proto_rawDescData
 }
 
-var file_cloud_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_cloud_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_cloud_proto_goTypes = []interface{}{
-	(*UploadFileRequest)(nil),  // 0: cloud.UploadFileRequest
-	(*UploadFileResponce)(nil), // 1: cloud.UploadFileResponce
+	(*UploadFileRequest)(nil),   // 0: cloud.UploadFileRequest
+	(*UploadFileResponce)(nil),  // 1: cloud.UploadFileResponce
+	(*DeleteFileRequest)(nil),   // 2: cloud.DeleteFileRequest
+	(*DeleteFileResponce)(nil),  // 3: cloud.DeleteFileResponce
+	(*GetFileRequest)(nil),      // 4: cloud.GetFileRequest
+	(*GetFileResponce)(nil),     // 5: cloud.GetFileResponce
+	(*GetFullDataRequest)(nil),  // 6: cloud.GetFullDataRequest
+	(*GetFullDataResponce)(nil), // 7: cloud.GetFullDataResponce
 }
 var file_cloud_proto_depIdxs = []int32{
 	0, // 0: cloud.Cloud.UploadFile:input_type -> cloud.UploadFileRequest
-	1, // 1: cloud.Cloud.UploadFile:output_type -> cloud.UploadFileResponce
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: cloud.Cloud.DeleteFile:input_type -> cloud.DeleteFileRequest
+	4, // 2: cloud.Cloud.GetFile:input_type -> cloud.GetFileRequest
+	6, // 3: cloud.Cloud.GetFullData:input_type -> cloud.GetFullDataRequest
+	1, // 4: cloud.Cloud.UploadFile:output_type -> cloud.UploadFileResponce
+	3, // 5: cloud.Cloud.DeleteFile:output_type -> cloud.DeleteFileResponce
+	5, // 6: cloud.Cloud.GetFile:output_type -> cloud.GetFileResponce
+	7, // 7: cloud.Cloud.GetFullData:output_type -> cloud.GetFullDataResponce
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -200,6 +553,78 @@ func file_cloud_proto_init() {
 				return nil
 			}
 		}
+		file_cloud_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteFileRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cloud_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteFileResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cloud_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFileRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cloud_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFileResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cloud_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFullDataRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cloud_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetFullDataResponce); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -207,7 +632,7 @@ func file_cloud_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cloud_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

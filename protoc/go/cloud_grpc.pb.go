@@ -23,6 +23,9 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CloudClient interface {
 	UploadFile(ctx context.Context, opts ...grpc.CallOption) (Cloud_UploadFileClient, error)
+	DeleteFile(ctx context.Context, in *DeleteFileRequest, opts ...grpc.CallOption) (*DeleteFileResponce, error)
+	GetFile(ctx context.Context, in *GetFileRequest, opts ...grpc.CallOption) (Cloud_GetFileClient, error)
+	GetFullData(ctx context.Context, in *GetFullDataRequest, opts ...grpc.CallOption) (Cloud_GetFullDataClient, error)
 }
 
 type cloudClient struct {
@@ -67,11 +70,87 @@ func (x *cloudUploadFileClient) CloseAndRecv() (*UploadFileResponce, error) {
 	return m, nil
 }
 
+func (c *cloudClient) DeleteFile(ctx context.Context, in *DeleteFileRequest, opts ...grpc.CallOption) (*DeleteFileResponce, error) {
+	out := new(DeleteFileResponce)
+	err := c.cc.Invoke(ctx, "/cloud.Cloud/DeleteFile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cloudClient) GetFile(ctx context.Context, in *GetFileRequest, opts ...grpc.CallOption) (Cloud_GetFileClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cloud_ServiceDesc.Streams[1], "/cloud.Cloud/GetFile", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &cloudGetFileClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cloud_GetFileClient interface {
+	Recv() (*GetFileResponce, error)
+	grpc.ClientStream
+}
+
+type cloudGetFileClient struct {
+	grpc.ClientStream
+}
+
+func (x *cloudGetFileClient) Recv() (*GetFileResponce, error) {
+	m := new(GetFileResponce)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *cloudClient) GetFullData(ctx context.Context, in *GetFullDataRequest, opts ...grpc.CallOption) (Cloud_GetFullDataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cloud_ServiceDesc.Streams[2], "/cloud.Cloud/GetFullData", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &cloudGetFullDataClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cloud_GetFullDataClient interface {
+	Recv() (*GetFullDataResponce, error)
+	grpc.ClientStream
+}
+
+type cloudGetFullDataClient struct {
+	grpc.ClientStream
+}
+
+func (x *cloudGetFullDataClient) Recv() (*GetFullDataResponce, error) {
+	m := new(GetFullDataResponce)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CloudServer is the server API for Cloud service.
 // All implementations must embed UnimplementedCloudServer
 // for forward compatibility
 type CloudServer interface {
 	UploadFile(Cloud_UploadFileServer) error
+	DeleteFile(context.Context, *DeleteFileRequest) (*DeleteFileResponce, error)
+	GetFile(*GetFileRequest, Cloud_GetFileServer) error
+	GetFullData(*GetFullDataRequest, Cloud_GetFullDataServer) error
 	mustEmbedUnimplementedCloudServer()
 }
 
@@ -81,6 +160,15 @@ type UnimplementedCloudServer struct {
 
 func (UnimplementedCloudServer) UploadFile(Cloud_UploadFileServer) error {
 	return status.Errorf(codes.Unimplemented, "method UploadFile not implemented")
+}
+func (UnimplementedCloudServer) DeleteFile(context.Context, *DeleteFileRequest) (*DeleteFileResponce, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFile not implemented")
+}
+func (UnimplementedCloudServer) GetFile(*GetFileRequest, Cloud_GetFileServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetFile not implemented")
+}
+func (UnimplementedCloudServer) GetFullData(*GetFullDataRequest, Cloud_GetFullDataServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetFullData not implemented")
 }
 func (UnimplementedCloudServer) mustEmbedUnimplementedCloudServer() {}
 
@@ -121,18 +209,93 @@ func (x *cloudUploadFileServer) Recv() (*UploadFileRequest, error) {
 	return m, nil
 }
 
+func _Cloud_DeleteFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CloudServer).DeleteFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/cloud.Cloud/DeleteFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CloudServer).DeleteFile(ctx, req.(*DeleteFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cloud_GetFile_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetFileRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CloudServer).GetFile(m, &cloudGetFileServer{stream})
+}
+
+type Cloud_GetFileServer interface {
+	Send(*GetFileResponce) error
+	grpc.ServerStream
+}
+
+type cloudGetFileServer struct {
+	grpc.ServerStream
+}
+
+func (x *cloudGetFileServer) Send(m *GetFileResponce) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cloud_GetFullData_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetFullDataRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CloudServer).GetFullData(m, &cloudGetFullDataServer{stream})
+}
+
+type Cloud_GetFullDataServer interface {
+	Send(*GetFullDataResponce) error
+	grpc.ServerStream
+}
+
+type cloudGetFullDataServer struct {
+	grpc.ServerStream
+}
+
+func (x *cloudGetFullDataServer) Send(m *GetFullDataResponce) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cloud_ServiceDesc is the grpc.ServiceDesc for Cloud service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Cloud_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "cloud.Cloud",
 	HandlerType: (*CloudServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DeleteFile",
+			Handler:    _Cloud_DeleteFile_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadFile",
 			Handler:       _Cloud_UploadFile_Handler,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "GetFile",
+			Handler:       _Cloud_GetFile_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetFullData",
+			Handler:       _Cloud_GetFullData_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "cloud.proto",
