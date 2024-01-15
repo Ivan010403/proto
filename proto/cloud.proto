@@ -11,6 +11,8 @@ service Cloud {
     rpc GetFullData (GetFullDataRequest) returns (stream GetFullDataResponce); 
 }
 
+
+
 message UploadFileRequest{
     string name_file = 1;
     string file_format = 2;
@@ -21,6 +23,8 @@ message UploadFileResponce {
     string full_name = 1;
 }
 
+
+
 message DeleteFileRequest {
     string name_file = 1;
     string file_format = 2;
@@ -30,6 +34,8 @@ message DeleteFileResponce {
     string full_name = 1;
 }
 
+
+
 message GetFileRequest {
     string name_file = 1;
     string file_format = 2;
@@ -38,6 +44,8 @@ message GetFileRequest {
 message GetFileResponce {
     bytes file = 1;
 }
+
+
 
 message GetFullDataRequest {
     string id = 1;
