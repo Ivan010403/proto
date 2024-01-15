@@ -1,6 +1,6 @@
 module github.com/Ivan010403/proto
 
-go 1.22rc1
+go 1.21.6
 
 require (
 	google.golang.org/grpc v1.60.1
