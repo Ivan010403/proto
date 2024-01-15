@@ -44,5 +44,7 @@ message GetFullDataRequest {
 }
 
 message GetFullDataResponce {
-    bytes data = 1;
+    string name = 1;
+    string creation_date = 2;
+    string updating_date = 3;
 }
