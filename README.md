@@ -6,24 +6,20 @@
 
 ```rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponce)```
 
-Заметим, что объём файла может быть слишком большим, и поэтому мы вынуждены использовать технологию streaming и фрагментировать наши данные, передавая их по частям.
+Заметим, что объём файла может быть слишком большим, и поэтому мы вынуждены использовать технологию streaming и фрагментировать наши данные, передавая их по частям (client-side streaming)
 
-3. Переход в директорию Oxygen
+2. Передача бинарного файла (изображения) от gRPC сервера к gRPC клиенту. Этим занимается:
 
-```cd Oxygen```
+```rpc GetFile (GetFileRequest) returns (stream GetFileResponce)```
 
-3. Создание виртуального окружения
+Поток данных развёрнут в сторону клиента (server-side streaming)
 
-```python3 -m venv venv```
+3. Иметь возможность посмотреть все файлы, которые сейчас хранятся на диске. Этим занимается:
 
-4. Активация виртуального окружения
+```rpc GetFullData (GetFullDataRequest) returns (stream GetFullDataResponce)```
 
-```source venv/bin/activate```
+И снова мы вынуждены использовать потоковую передачу
 
-5. Установка зависимостей
+4. Также я возможность удалить файл используя унарный вызов:
 
-```pip3 install -r requirements.txt```
-
-6. Запуск скрипта для демонстрации возможностей Oxygen
-
-```python3 oxygen.py --help```
+```rpc DeleteFile (DeleteFileRequest) returns (DeleteFileResponce)```
